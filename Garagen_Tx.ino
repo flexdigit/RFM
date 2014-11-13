@@ -11,8 +11,13 @@ ISR(WDT_vect) { Sleepy::watchdogEvent(); } // interrupt handler for JeeLabs Slee
 #define freq      RF12_868MHZ    // 868 MHz
 #define network   212            // RF12 Network group
 
-#define SWITCH_DOOR    3
-#define SWITCH_GATE    4
+// for UNO purpose          // ATtiny84 Pin (phys.)
+#define SWITCH_DOOR    7    // 10
+#define SWITCH_GATE    8    // 11
+
+// for UNO purpose
+//#define SWITCH_DOOR    3
+//#define SWITCH_GATE    4
 
 typedef struct {
     boolean door;
@@ -60,10 +65,10 @@ static void rfwrite(){
         rf12_recvDone();
     rf12_sendStart(0, &garage_data, sizeof garage_data);
     rf12_sendWait(2);
-    Serial.print("door:");
-    Serial.print(garage_data.door);
-    Serial.print(" gate: ");
-    Serial.println(garage_data.gate);
-    delay(200);
+    //Serial.print("door:");
+    //Serial.print(garage_data.door);
+    //Serial.print(" gate: ");
+    //Serial.println(garage_data.gate);
+    //delay(200);
     rf12_sleep(0);        // put RF module to sleep
 }
